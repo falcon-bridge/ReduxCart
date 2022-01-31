@@ -7,6 +7,11 @@ const cartSlice = createSlice({
     totalQuantity: 0,
   },
   reducers: {
+    replaceCart(state, action) {
+      // state = action.payload; this is wrong as objects in JS are not copied by value, but by reference and action.payload can get erased from memory after its use is over
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
+    },
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
